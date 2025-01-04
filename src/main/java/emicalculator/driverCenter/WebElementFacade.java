@@ -59,6 +59,18 @@ public class WebElementFacade implements WebElement{
             throw e;
         }
     }
+    
+    public String getValue() {
+    	 try {
+             logger.debug("Attempting to get value of the element: {}", element);
+             String value = element.getAttribute("value");
+             logger.info("Successfully fetched value: {}", value);
+             return value;
+         } catch (WebDriverException e) {
+             logger.error("Failed to get tag name for the element: {}", element, e);
+             throw e;
+         }
+    }
 
     @Override
     public void submit() {

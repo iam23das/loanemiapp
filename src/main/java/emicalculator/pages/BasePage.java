@@ -5,15 +5,16 @@ import org.openqa.selenium.WebDriver;
 
 import emicalculator.driverCenter.WebElementFacade;
 
-public abstract class BasePage implements LoanPage {
-	private WebElementFacade loanAmountElement;
-	private WebElementFacade interestRateAmountElement;
-	private WebElementFacade loanTenureValueElement;
-	private WebElementFacade loanEmiAmountElement;
-	private WebElementFacade totalInterestPayableElement;
-	private WebElementFacade totalPaymentElement;
-	private WebElementFacade yearElement;
-	private WebElementFacade monthElement;
+public class BasePage implements LoanPage {
+	
+	protected WebElementFacade loanAmountElement;
+	protected WebElementFacade interestRateAmountElement;
+	protected WebElementFacade loanTenureValueElement;
+	protected WebElementFacade loanEmiAmountElement;
+	protected WebElementFacade totalInterestPayableElement;
+	protected WebElementFacade totalPaymentElement;
+	protected WebElementFacade yearElement;
+	protected WebElementFacade monthElement;
 
 	public BasePage(WebDriver driver) {
 		loanAmountElement = new WebElementFacade(driver, By.id("loanamount"));
@@ -22,29 +23,30 @@ public abstract class BasePage implements LoanPage {
 		loanEmiAmountElement = new WebElementFacade(driver, By.xpath("//div[@id='emiamount']/p/span"));
 		totalInterestPayableElement = new WebElementFacade(driver, By.id("//div[@id='emitotalinterest']/p/span"));
 		totalPaymentElement = new WebElementFacade(driver, By.xpath("//div[@id='emitotalamount']/p/span"));
+	    yearElement = new WebElementFacade(driver, By.xpath("//input[@id='loanyears']"));
+	    monthElement = new WebElementFacade(driver, By.xpath("//input[@id='loanmonths']"));
 	}
-	
 
 	@Override
-	public void enterLoanAmount() {
+	public void enterLoanAmount(String amount) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void enterInterestRate() {
+	public void enterInterestRate(String interestRate) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void enterLoanTenureInYear() {
+	public void enterLoanTenureInYear(String tenure) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void enterLoanTenureInMonths() {
+	public void enterLoanTenureInMonths(String tenure) {
 		// TODO Auto-generated method stub
 
 	}
