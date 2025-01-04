@@ -1,5 +1,7 @@
 package emicalculator.pages;
 
+import emicalculator.driverCenter.WebElementFacade;
+
 public interface LoanPage {
       void enterLoanAmount();
       void enterInterestRate();
