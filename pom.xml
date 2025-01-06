@@ -6,7 +6,7 @@
   <properties>
 	  <selenium.version>4.20.0</selenium.version>
 	  <cucumber.version>7.15.0</cucumber.version>
-	  <webdrivermanager.version>5.3.2</webdrivermanager.version>
+	  <webdrivermanager.version>5.9.2</webdrivermanager.version>
 	  <log.version>2.17.1</log.version>
   </properties>
   <dependencies>

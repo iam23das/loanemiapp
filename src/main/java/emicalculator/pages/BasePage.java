@@ -20,11 +20,11 @@ public class BasePage implements LoanPage {
 		loanAmountElement = new WebElementFacade(driver, By.id("loanamount"));
 		interestRateAmountElement = new WebElementFacade(driver, By.id("loaninterest"));
 		loanTenureValueElement = new WebElementFacade(driver, By.id("loanterm"));
-		loanEmiAmountElement = new WebElementFacade(driver, By.xpath("//div[@id='emiamount']/p/span"));
-		totalInterestPayableElement = new WebElementFacade(driver, By.id("//div[@id='emitotalinterest']/p/span"));
+		loanEmiAmountElement = new WebElementFacade(driver, By.xpath("//*[@id='emiamount']/p/span"));
+		totalInterestPayableElement = new WebElementFacade(driver, By.xpath("//div[@id='emitotalinterest']/p/span"));
 		totalPaymentElement = new WebElementFacade(driver, By.xpath("//div[@id='emitotalamount']/p/span"));
-	    yearElement = new WebElementFacade(driver, By.xpath("//input[@id='loanyears']"));
-	    monthElement = new WebElementFacade(driver, By.xpath("//input[@id='loanmonths']"));
+	    yearElement = new WebElementFacade(driver, By.xpath("//*[@id='emicalculatorinnerform']/div[7]/div/div/div/div/div/label[1]"));
+	    monthElement = new WebElementFacade(driver, By.xpath("//*[@id='emicalculatorinnerform']/div[7]/div/div/div/div/div/label[2]"));
 	}
 
 	@Override

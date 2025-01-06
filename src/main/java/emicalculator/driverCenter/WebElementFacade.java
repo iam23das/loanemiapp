@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
@@ -70,6 +71,20 @@ public class WebElementFacade implements WebElement{
              logger.error("Failed to get tag name for the element: {}", element, e);
              throw e;
          }
+    }
+    
+    public void scrollAndClick() {
+        try {
+            logger.debug("Scrolling to and clicking on the element: {}", element);
+            // Scroll the element into view using JavaScript
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+            // Click on the element
+            element.click();
+            logger.info("Successfully scrolled to and clicked on the element.");
+        } catch (WebDriverException e) {
+            logger.error("Failed to scroll and click on the element: {}", element, e);
+            throw e;
+        }
     }
 
     @Override

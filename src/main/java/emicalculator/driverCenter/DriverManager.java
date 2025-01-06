@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
+import emicalculator.utility.PropertyUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverManager {
@@ -41,12 +42,39 @@ public class DriverManager {
         }
         return driver;
     }
+    
+    public void openPage(String url) {
+        try {
+            logger.info("Navigating to URL: {}", url);
+            if (driver == null) {
+                throw new IllegalStateException("WebDriver not initialized. Call getDriver() before openPage().");
+            }
+            driver.get(url);
+            logger.info("Successfully navigated to URL: {}", url);
+        } catch (Exception e) {
+            logger.error("Error while navigating to URL: {}", url, e);
+            throw e;
+        }
+    }
+    
+    public void maximizeBrowser() {
+    	logger.info("Maximizing the browser window.");
+        if (driver == null) {
+            throw new IllegalStateException("WebDriver not initialized. Call getDriver() before maximizing the browser.");
+        }
+        driver.manage().window().maximize();
+        logger.info("Browser window maximized successfully.");
+    }
 
     private void initializeDriver(String browser, boolean headless) {
         try {
             switch (browser.toLowerCase()) {
                 case "chrome":
-                    WebDriverManager.chromedriver().setup();
+                    String chromeDriverPath = PropertyUtils.getProperty("chrome.driver.path");
+                    if (chromeDriverPath == null || chromeDriverPath.isEmpty()) {
+                        throw new RuntimeException("Chrome driver path not specified in config.properties.");
+                    }
+                    System.setProperty("webdriver.chrome.driver", chromeDriverPath);
                     ChromeOptions chromeOptions = new ChromeOptions();
                     if (headless) {
                         chromeOptions.addArguments("--headless");
@@ -58,7 +86,11 @@ public class DriverManager {
                     logger.info("Chrome WebDriver initialized.");
                     break;
                 case "firefox":
-                    WebDriverManager.firefoxdriver().setup();
+                    String geckoDriverPath = PropertyUtils.getProperty("gecko.driver.path");
+                    if (geckoDriverPath == null || geckoDriverPath.isEmpty()) {
+                        throw new RuntimeException("Gecko driver path not specified in config.properties.");
+                    }
+                    System.setProperty("webdriver.gecko.driver", geckoDriverPath);
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
                     if (headless) {
                         firefoxOptions.addArguments("-headless");
@@ -80,15 +112,17 @@ public class DriverManager {
 
     // Method to clear the WebDriver cache
     public void clearCache() {
-        try {
-            logger.info("Clearing WebDriver cache.");
-            if (driver != null) {
-                driver.quit();
-                driver = null;
-                logger.info("WebDriver cache cleared and driver quit.");
+    	try {
+            logger.info("Clearing browser cache.");
+            if (driver == null) {
+                throw new IllegalStateException("WebDriver not initialized. Call getDriver() before clearCache().");
             }
+
+            // Clear cache using browser-specific commands
+            driver.manage().deleteAllCookies(); // Deletes all cookies
+            logger.info("Browser cache cleared successfully.");
         } catch (Exception e) {
-            logger.error("Error while clearing WebDriver cache.", e);
+            logger.error("Error while clearing browser cache.", e);
         }
     }
 
