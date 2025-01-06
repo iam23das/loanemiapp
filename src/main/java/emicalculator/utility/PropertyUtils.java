@@ -2,6 +2,7 @@ package emicalculator.utility;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +15,7 @@ public class PropertyUtils {
 
     // Static block to load properties when the class is loaded
     static {
-        try (FileInputStream fis = new FileInputStream(CONFIG_FILE_PATH)) {
+        try (InputStream fis = PropertyUtils.class.getClassLoader().getResourceAsStream("config.properties")) {
             properties.load(fis);
             logger.info("Properties file loaded successfully.");
         } catch (IOException e) {
