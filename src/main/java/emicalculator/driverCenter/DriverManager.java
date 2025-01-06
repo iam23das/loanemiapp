@@ -74,12 +74,14 @@ public class DriverManager {
                     if (chromeDriverPath == null || chromeDriverPath.isEmpty()) {
                         throw new RuntimeException("Chrome driver path not specified in config.properties.");
                     }
+                    logger.info("Setting ChromeDriver path to: {}", chromeDriverPath);
                     System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+                    
                     ChromeOptions chromeOptions = new ChromeOptions();
                     if (headless) {
                         chromeOptions.addArguments("--headless");
-                        chromeOptions.addArguments("--disable-gpu"); // Recommended for headless mode
-                        chromeOptions.addArguments("--window-size=1920x1080"); // Set window size for headless mode
+                        chromeOptions.addArguments("--disable-gpu");
+                        chromeOptions.addArguments("--window-size=1920x1080");
                         logger.info("Running Chrome in headless mode.");
                     }
                     driver = new ChromeDriver(chromeOptions);
@@ -90,7 +92,9 @@ public class DriverManager {
                     if (geckoDriverPath == null || geckoDriverPath.isEmpty()) {
                         throw new RuntimeException("Gecko driver path not specified in config.properties.");
                     }
+                    logger.info("Setting GeckoDriver path to: {}", geckoDriverPath);
                     System.setProperty("webdriver.gecko.driver", geckoDriverPath);
+                    
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
                     if (headless) {
                         firefoxOptions.addArguments("-headless");
