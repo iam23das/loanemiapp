@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 public class PropertyUtils {
 	private static final Logger logger = LogManager.getLogger(PropertyUtils.class);
     private static final Properties properties = new Properties();
-    private static final String CONFIG_FILE_PATH = "D:\\Repository\\loanamiapp\\src\\main\\resources\\config.properties";
+    private static final String CONFIG_FILE_PATH = "src/main/resources/config.properties";
 
     // Static block to load properties when the class is loaded
     static {
